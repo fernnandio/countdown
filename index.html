@@ -34,23 +34,28 @@
     <div id="countdown"></div>
 
     <script>
-        const returnDate = new Date("2025-02-01");
+        const returnDate = new Date("2025-02-01T00:00:00");
 
         function updateCountdown() {
             const now = new Date();
             const timeDifference = returnDate - now;
-            const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-            
-            const countdownElement = document.getElementById("countdown");
-            if (daysLeft >= 0) {
-                countdownElement.textContent = `${daysLeft} day${daysLeft !== 1 ? "s" : ""} left`;
+
+            if (timeDifference > 0) {
+                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").textContent = 
+                    `${days} day${days !== 1 ? "s" : ""}, ${hours} hour${hours !== 1 ? "s" : ""}, `
+                    + `${minutes} minute${minutes !== 1 ? "s" : ""}, and ${seconds} second${seconds !== 1 ? "s" : ""} left ❤️`;
             } else {
-                countdownElement.textContent = "yeeeeeeeeeeeeey";
+                document.getElementById("countdown").textContent = "yeeeeeeeeeeeeey 🎉";
             }
         }
 
         updateCountdown();
-        setInterval(updateCountdown, 1000 * 60 * 60 * 24);
+        setInterval(updateCountdown, 1000); 
     </script>
 </body>
 </html>
