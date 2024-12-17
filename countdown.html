@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>countdown ❤️</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: #f9f9f9;
+            color: #333;
+            background: #000;
+            color: #fff;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        #countdown {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6347;
+        }
+    </style>
+</head>
+<body>
+    <h1>days until 🦁❤️🐯 </h1>
+    <div id="countdown"></div>
+
+    <script>
+        // Set the return date
+        const returnDate = new Date("2025-02-01");
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeDifference = returnDate - now;
+            const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+            
+            const countdownElement = document.getElementById("countdown");
+            if (daysLeft >= 0) {
+                countdownElement.textContent = `${daysLeft} day${daysLeft !== 1 ? "s" : ""} left`;
+            } else {
+                countdownElement.textContent = "yeeeeeeeeeeeeey";
+            }
+        }
+
+        // Update countdown immediately and then every day
+        updateCountdown();
+        setInterval(updateCountdown, 1000 * 60 * 60 * 24);
+    </script>
+</body>
+</html>
+
