@@ -1,62 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>countdown ❤️</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background: #f9f9f9;
-            color: #333;
-            background: #000;
-            color: #fff;
-        }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        #countdown {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #ff6347;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>countdown ❤️</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #000;
+      color: #fff;
+    }
+    .container {
+      display: flex;
+      gap: 4rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .countdown {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff6347;
+    }
+    .block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      background: #111;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(255, 99, 71, 0.4);
+      min-width: 280px;
+    }
+  </style>
 </head>
 <body>
-    <h1>days until 🦁❤️🐯 </h1>
-    <div id="countdown"></div>
+  <div class="container">
+    <div class="block">
+      <h1>days until 🦁❤️🐯<br>(14 sept)</h1>
+      <div id="countdown-sept" class="countdown"></div>
+    </div>
 
-    <script>
-        const returnDate = new Date("2025-04-19T00:00:00");
+    <div class="block">
+      <h1>days until we live together 🏡❤️<br>(1 dec)</h1>
+      <div id="countdown-dec" class="countdown"></div>
+    </div>
+  </div>
 
-        function updateCountdown() {
-            const now = new Date();
-            const timeDifference = returnDate - now;
+  <script>
+    const dates = {
+      sept: new Date("2025-09-14T00:00:00"),
+      dec: new Date("2025-12-01T00:00:00"),
+    };
 
-            if (timeDifference > 0) {
-                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+    function updateCountdown(targetDate, elementId) {
+      const now = new Date();
+      const timeDifference = targetDate - now;
 
-                document.getElementById("countdown").textContent = 
-                    `${days} day${days !== 1 ? "s" : ""}, ${hours} hour${hours !== 1 ? "s" : ""}, `
-                    + `${minutes} minute${minutes !== 1 ? "s" : ""}, and ${seconds} second${seconds !== 1 ? "s" : ""} left️`;
-            } else {
-                document.getElementById("countdown").textContent = "yeeeeeeeeeeeeey 🎉";
-            }
-        }
+      const element = document.getElementById(elementId);
 
-        updateCountdown();
-        setInterval(updateCountdown, 1000); 
-    </script>
+      if (timeDifference > 0) {
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        element.textContent = 
+          `${days} day${days !== 1 ? "s" : ""}, ${hours} hour${hours !== 1 ? "s" : ""}, `
+          + `${minutes} minute${minutes !== 1 ? "s" : ""}, and ${seconds} second${seconds !== 1 ? "s" : ""} left️`;
+      } else {
+        element.textContent = "yeeeeeeeeeeeeey 🎉";
+      }
+    }
+
+    function tick() {
+      updateCountdown(dates.sept, "countdown-sept");
+      updateCountdown(dates.dec, "countdown-dec");
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  </script>
 </body>
 </html>
-
